@@ -13,19 +13,43 @@ clock = pygame.time.Clock()
 # print(pygame.K_UP)
 x = 0
 y = 0
+direction = 0
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
     draw_rect(x,y)
-    
-    x += 1
-    # if pygame.key.get_pressed()[pygame.K_DOWN] :
-    #     y += 1
-    
+    pressed = pygame.key.get_pressed()
+    if pressed[pygame.K_DOWN] :
+        direction = 1
+    elif pressed[pygame.K_LEFT] :
+        direction = 2
+    elif pressed[pygame.K_UP] :
+        direction = 3
+    elif pressed[pygame.K_RIGHT] :
+        direction = 0
+
+    if direction == 0:
+        x += 1
+    elif direction == 1 :
+        y += 1
+    elif direction == 2 :
+        x -= 1
+    elif direction == 3:
+        y -= 1
+ 
+    if x > 800 :
+        x = 0 
+    if x < 0 :
+        x = 800
+    if y > 400 :
+        y = 0
+    if y < 0 :
+        y = 400
 
     pygame.display.update()
     clock.tick(60)
+
    
     
