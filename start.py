@@ -1,13 +1,21 @@
 import pygame
 import sys
 import random
-def draw_rect():
-    rectangle = pygame.Rect(10,10,10,10)
+def draw_rect(x,y):
+    rectangle = pygame.Rect(0,0,10,10)
     pygame.draw.rect(display_window, green, rectangle)
-
+    pygame.display.flip()
 
 pygame.init()
-display_window = pygame.display.set_mode((800,400))
 green = (0,255,0)
-rectangle = pygame.Rect(10,10,10,10)
-pygame.draw.rect(display_window, green, rectangle)
+display_window = pygame.display.set_mode((800,400))
+# print(pygame.K_UP)
+x = 0
+y = 0
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+    draw_rect()
+    
