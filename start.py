@@ -1,25 +1,34 @@
 import pygame
 import sys
 import random
-def draw_rect(x,y):
+def draw_rect(x,y,colour):
     rectangle = pygame.Rect(x,y,10,10)
-    pygame.draw.rect(display_window, green, rectangle)
+    pygame.draw.rect(display_window, colour, rectangle)
     pygame.display.flip()
 
 pygame.init()
 green = (0,255,0)
+black = (0,0,0)
+red = (0,0,255)
 display_window = pygame.display.set_mode((800,400))
 clock = pygame.time.Clock()
 # print(pygame.K_UP)
 x = 0
 y = 0
 direction = 0
+colour = None
+# obstacle = (400,200)
+draw_rect(400,200,red)
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-    draw_rect(x,y)
+    # prev_x = x
+    # prev_y = y
+    draw_rect(x,y,green)
+    # draw_rect(x-10,y-10,black)
+    
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_DOWN] :
         direction = 1
@@ -32,12 +41,16 @@ while True:
 
     if direction == 0:
         x += 1
+        draw_rect(x-10,y,black )
     elif direction == 1 :
         y += 1
+        draw_rect(x,y-10,black )
     elif direction == 2 :
         x -= 1
+        draw_rect(x+10,y,black)
     elif direction == 3:
         y -= 1
+        draw_rect(x,y+10,black)
  
     if x > 800 :
         x = 0 
@@ -49,7 +62,7 @@ while True:
         y = 400
 
     pygame.display.update()
-    clock.tick(60)
+    clock.tick(50.5)
 
    
     
