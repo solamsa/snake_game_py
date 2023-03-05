@@ -1,10 +1,22 @@
 import pygame
 import sys
 import random
+
 def draw_rect(x,y,colour):
     rectangle = pygame.Rect(x,y,10,10)
     pygame.draw.rect(display_window, colour, rectangle)
     pygame.display.flip()
+
+def wall_pass(x,y):
+    if x > 800 :
+        x = 0 
+    if x < 0 :
+        x = 800
+    if y > 400 :
+        y = 0
+    if y < 0 :
+        y = 400
+    return x,y
 
 pygame.init()
 green = (0,255,0)
@@ -19,16 +31,15 @@ direction = 0
 colour = None
 # obstacle = (400,200)
 draw_rect(400,200,red)
+
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-    # prev_x = x
-    # prev_y = y
+    x,y = wall_pass(x,y)
     draw_rect(x,y,green)
-    # draw_rect(x-10,y-10,black)
-    
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_DOWN] :
         direction = 1
@@ -51,16 +62,7 @@ while True:
     elif direction == 3:
         y -= 1
         draw_rect(x,y+10,black)
- 
-    if x > 800 :
-        x = 0 
-    if x < 0 :
-        x = 800
-    if y > 400 :
-        y = 0
-    if y < 0 :
-        y = 400
-
+  
     pygame.display.update()
     clock.tick(50.5)
 
