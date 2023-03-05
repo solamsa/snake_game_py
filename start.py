@@ -38,7 +38,6 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-    x,y = wall_pass(x,y)
     draw_rect(x,y,green)
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_DOWN] :
@@ -52,15 +51,19 @@ while True:
 
     if direction == 0:
         x += 1
+        x,y = wall_pass(x,y)
         draw_rect(x-10,y,black )
     elif direction == 1 :
         y += 1
+        x,y = wall_pass(x,y)
         draw_rect(x,y-10,black )
     elif direction == 2 :
         x -= 1
+        x,y = wall_pass(x,y)
         draw_rect(x+10,y,black)
     elif direction == 3:
         y -= 1
+        x,y = wall_pass(x,y)
         draw_rect(x,y+10,black)
   
     pygame.display.update()
